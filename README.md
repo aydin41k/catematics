@@ -1,4 +1,6 @@
-![Kitten Logo](https://coderoo.com.au/projects/sarasoft/kitten.png)
+<p align="center">
+  <img src="https://coderoo.com.au/projects/sarasoft/kitten.png" alt="Kitten Logo" height="100"/>
+</p>
 
 # Cat Math Adventure 🐾🔢
 
