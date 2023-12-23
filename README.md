@@ -8,6 +8,7 @@ Kids need to practice maths. They don't like homeworks. Instead, they like their
 
 ## How to Play 🎮
 
+- Go to our glorious website: http://sara.salimova.site
 - Each round, you'll be presented with an addition problem that doesn't exceed the sum of 25.
 - To answer, simply drag the appropriate number of big cats (worth 10) and small kittens (worth 1) into the bucket.
 - Hit the "Submit" button to check your answer. If you get it right, you earn a win! If not, try again!
