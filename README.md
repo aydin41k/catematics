@@ -2,7 +2,7 @@
   <img src="https://coderoo.com.au/projects/sarasoft/kitten.png" alt="Kitten Logo" height="100"/>
 </p>
 
-# Cat Math Adventure 🐾🔢
+# Catematics 🐾🔢
 
 Kids need to practice maths. They don't like homeworks. Instead, they like their screens. Incoming Catematics!
 
@@ -44,4 +44,4 @@ Send messages of love and pictures of cats!
 
 ---
 
-Cat Math Adventure - making learning as delightful as a kitten's purr! 😺✨ (a cheesy ChatGPT tagline)
+Catematics - making learning as delightful as a kitten's purr! 😺✨ (a cheesy ChatGPT tagline)
