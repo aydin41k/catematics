@@ -1,0 +1,105 @@
+body {
+    height: 100vh;
+    background-color: #f5f5f7; /* Light gray background, common in Apple's design */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Apple-like typography */
+    color: #333; /* Dark text for readability */
+    margin: 0;
+    padding: 0;
+  }
+  
+  #game {
+      text-align: center;
+    padding: 20px;
+  }
+  
+  #cats {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  #catContainer, 
+  #kittenContainer {
+    height: 120px;
+    display: flex;
+    align-items: end;
+  }
+  
+  #cats > div > * {
+    margin: 0 10px;
+  }
+  
+  .cat, .kitten {
+    cursor: pointer;
+    margin: auto 10px;
+  }
+  
+  .cat img {
+    width: 100px;
+  }
+  
+  .kitten img {
+    width: 60px;
+  }
+  
+  #bucket {
+      min-height: 200px;
+      width: 80%;
+      border: 3px solid black;
+    border-top: 1px dashed black;
+      margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+      box-shadow: 1px 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+  }
+  
+  #submit,
+  #reset {
+    background-image: linear-gradient(to bottom, #0071e3, #005cb9); /* Blue gradient */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    border-radius: 20px; /* Rounded corners for the button */
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  #submit:hover,
+  #reset:hover {
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+  }
+  
+  #question,
+  #total {
+    font-size: 2em;
+    margin: 0 auto;
+    padding: 10px 0;
+    color: #0071e3;
+  }
+  
+  #question {
+    font-family: Fredoka, cursive;
+    font-size: 3em;
+    color: #0071e3;
+    margin: 40px 0 20px;
+  }
+  
+  #score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-image: linear-gradient(to bottom, #ff9900, #6600cc); /* Blue gradient */
+    color: #fff; /* White text */
+    border: none; /* No border */
+    border-radius: 10px; /* Rounded corners for the button */
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
