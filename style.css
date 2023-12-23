@@ -25,7 +25,7 @@ body {
     align-items: end;
   }
   
-  #cats > div > * {
+  #cats > div > div {
     margin: 0 10px;
   }
   
@@ -34,6 +34,10 @@ body {
     margin: auto 10px;
   }
   
+  #cats img {
+    vertical-align: bottom;
+  }
+
   .cat img {
     width: 100px;
   }
@@ -41,17 +45,43 @@ body {
   .kitten img {
     width: 60px;
   }
+
+  /* #cats .kitten:before {
+    content: '';
+    background: url(https://coderoo.com.au/projects/sarasoft/plusone.png) no-repeat;
+    width: 80px;
+    height: 100px;
+    display: inline-block;
+    background-size: contain;
+  }
+
+  #cats .cat:after {
+    content: '';
+    background: url(https://coderoo.com.au/projects/sarasoft/plusten.png) no-repeat;
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    background-size: contain;
+  } */
   
   #bucket {
-      min-height: 200px;
-      width: 80%;
-      border: 3px solid black;
+    min-height: 200px;
+    width: 80%;
+    border: 3px solid black;
     border-top: 1px dashed black;
-      margin: 0 auto;
+    margin: 0 auto;
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
-      box-shadow: 1px 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+    box-shadow: 1px 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+  }
+
+  #bucket #bucket-instructions {
+    width: 100%;
+    margin: 20px auto;
+    font-size: 1.5em;
+    font-family: Fredoka, cursive;
+    color: #949494;
   }
   
   #submit,

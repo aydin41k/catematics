@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,20 +11,32 @@
     <div id="game">
         <div id="question"></div>
         <div id="cats">
-            <div id="catContainer">
-                <div id="big-cat" class="cat"> <img src="https://coderoo.com.au/projects/sarasoft/cat.png"> </div>
-            </div>
             <div id="kittenContainer">
-                <div id="small-cat" class="kitten"> <img src="https://coderoo.com.au/projects/sarasoft/kitten.png"> </div>
+                <img src="https://coderoo.com.au/projects/sarasoft/plusone.png">
+                <div id="small-cat" class="kitten">
+                    <img src="https://coderoo.com.au/projects/sarasoft/kitten.png">
+                </div>
+            </div>
+            <div id="catContainer">
+                <div id="big-cat" class="cat">
+                    <img src="https://coderoo.com.au/projects/sarasoft/cat.png">
+                </div>
+                <img src="https://coderoo.com.au/projects/sarasoft/plusten.png">
             </div>
         </div>
         <div id="total"></div>
-        <div id="bucket"></div> <button id="submit">Submit</button> <button id="reset">Reset</button> </div>
+        <div id="bucket">
+            <div id="bucket-instructions">
+                Drag the cats into the bucket to make the total
+            </div>
+        </div> 
+        <button id="submit">Submit</button>
+        <button id="reset">Reset</button> 
+    </div>
     <div id="score">Wins: <span id="win-count">0</span></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="script.js"></script>
 </body>
-
 </html>

@@ -30,14 +30,17 @@ $(document).ready(function() {
             src: 'https://coderoo.com.au/projects/sarasoft/' + catType + '.png'
         });
 
-        // Append the image to the div
         catDiv.append(catImg);
         catDiv.draggable({revert:'invalid'})
 
       switch(location) {
         case 'home':
           // Add the div to the #catContainer
-          $('#' + catType + 'Container').prepend(catDiv);
+          if(catType === 'kitten') {
+            $('#' + catType + 'Container').append(catDiv);
+          } else {
+            $('#' + catType + 'Container').prepend(catDiv);
+          }
           break;
         case 'bucket':
           // Add the div to the #catContainer
@@ -80,8 +83,9 @@ $(document).ready(function() {
 
     $('#bucket').droppable({
         drop: function(event, ui) {
-          ui.draggable[0].remove();
-          addToBucket(ui.draggable[0].id)
+            $('#bucket #bucket-instructions').remove();
+            ui.draggable[0].remove();
+            addToBucket(ui.draggable[0].id)
         }
     });
 
