@@ -45,24 +45,6 @@ body {
   .kitten img {
     width: 60px;
   }
-
-  /* #cats .kitten:before {
-    content: '';
-    background: url(https://coderoo.com.au/projects/sarasoft/plusone.png) no-repeat;
-    width: 80px;
-    height: 100px;
-    display: inline-block;
-    background-size: contain;
-  }
-
-  #cats .cat:after {
-    content: '';
-    background: url(https://coderoo.com.au/projects/sarasoft/plusten.png) no-repeat;
-    width: 100px;
-    height: 100px;
-    display: inline-block;
-    background-size: contain;
-  } */
   
   #bucket {
     min-height: 200px;
