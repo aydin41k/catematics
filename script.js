@@ -2,6 +2,27 @@ $(document).ready(function() {
     let total = 0;
     let answer = 0;
     let wins = localStorage.getItem('wins') ? parseInt(localStorage.getItem('wins'), 10) : 0;
+
+    const cats = [
+      {
+        id: 'cat_1',
+        value: 1,
+        image: 'images/kitten.png',
+        class: 'kitten',
+      },
+      {
+        id: 'cat_2',
+        value: 5,
+        image: 'images/cat_five_sm.png',
+        class: 'cat',
+      },
+      {
+        id: 'cat_3',
+        value: 10,
+        image: 'images/cat.png',
+        class: 'cat',
+      },
+    ];
   
     function generateQuestion() {
         var a = Math.floor(Math.random() * 10);
@@ -18,16 +39,16 @@ $(document).ready(function() {
     }
 
     function make(cat, location) {
-        var catType = cat === 'cat' ? 'cat' : 'kitten';
+      const {id, value, image} = cat;
+
         // Create the div element with id and class
         var catDiv = $('<div>', {
-            id: cat === 'cat' ? 'big-cat' : 'small-cat',
-            class: catType,
+            id,
         });
 
         // Create the image element with its source
         var catImg = $('<img>', {
-            src: 'https://coderoo.com.au/projects/sarasoft/' + catType + '.png'
+            src: image,
         });
 
         catDiv.append(catImg);
@@ -36,10 +57,13 @@ $(document).ready(function() {
       switch(location) {
         case 'home':
           // Add the div to the #catContainer
-          if(catType === 'kitten') {
-            $('#' + catType + 'Container').append(catDiv);
+          // if there is $('#' + cat.id), then append catDiv to it; otherwise create it and append
+          if ($('#' + cat.id + '_container').length) {
+            $('#' + cat.id + '_container').append(catDiv);
           } else {
-            $('#' + catType + 'Container').prepend(catDiv);
+            const catContainer = $('<div>', {id: cat.id + '_container', class: 'cat-container'});
+            catContainer.append(catDiv);
+            $('#cats').append(catContainer);
           }
           break;
         case 'bucket':
@@ -52,16 +76,17 @@ $(document).ready(function() {
     }
   
   function addToBucket(cat) {
-    const catType = cat === 'big-cat' ? 'cat' : 'kitten';
-    const catValue = cat === 'big-cat' ? 10 : 1;
+    make(cat, 'bucket');
+    make(cat, 'home');
     
-    make(catType, 'bucket');
-    make(catType, 'home');
-    
-    total += catValue;
+    total += cat.value;
     $('#total').text('').text(total);
   }
   
+  function findCatById(id) {
+    return cats.find(cat => cat.id === id);
+  }
+
   function reset() {
       total = 0;
       $('#total').text('');
@@ -77,15 +102,12 @@ $(document).ready(function() {
       wins = 0;
       setWins(0);
   }
-  
-    $('.cat').draggable({revert: 'invalid'});
-    $('.kitten').draggable({revert: 'invalid'});
 
     $('#bucket').droppable({
         drop: function(event, ui) {
-            $('#bucket #bucket-instructions').remove();
+            $('.instructions').remove();
             ui.draggable[0].remove();
-            addToBucket(ui.draggable[0].id)
+            addToBucket(findCatById(ui.draggable[0].id))
         }
     });
 
@@ -114,4 +136,6 @@ $(document).ready(function() {
   
     setWins(wins);
     generateQuestion();
+
+    cats.sort((a, b) => b.value - a.value).forEach(cat => make(cat, 'home'));
 });
