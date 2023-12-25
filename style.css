@@ -72,7 +72,8 @@ body {
   }
   
   #submit,
-  #reset {
+  #reset,
+  #skip {
     background-image: linear-gradient(to bottom, #0071e3, #005cb9); /* Blue gradient */
     color: #fff; /* White text */
     border: none; /* No border */

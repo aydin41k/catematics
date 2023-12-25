@@ -1,44 +1,107 @@
+/* Cats */
+const cats = [
+  {
+    id: 'cat_1',
+    value: 1,
+    image: 'images/kitten.png',
+    class: 'kitten',
+    enabled: true,
+  },
+  {
+    id: 'cat_2',
+    value: 5,
+    image: 'images/cat_five_sm.png',
+    class: 'cat',
+    enabled: true,
+  },
+  {
+    id: 'cat_3',
+    value: 10,
+    image: 'images/cat.png',
+    class: 'cat',
+    enabled: true,
+  },
+];
+
+/* Question logic*/
+
+/**
+ * @returns array [string question, int answer]
+ */
+function generateQuestion() {
+  var questionTypes = [
+      generateAddition,
+      generateSubtraction,
+      generateMultiplication,
+      generateSquare,
+      generateSquareRoot,
+      generateSimpleEquation
+  ];
+
+  // Randomly select a question type
+  var generate = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+  return generate();
+}
+
+function generateAddition() {
+  var a = Math.floor(Math.random() * 16); // 0-15
+  var b = 30 - a; // Ensures sum does not exceed 30
+  return [a + " + " + b + " = ?", a + b];
+}
+
+function generateSubtraction() {
+  var a = Math.floor(Math.random() * 22); // 0-21
+  var b = Math.floor(Math.random() * (a + 1)); // Ensures result is non-negative
+  return [a + " - " + b + " = ?", a - b];
+}
+
+function generateMultiplication() {
+  var a = Math.floor(Math.random() * 11); // 0-10
+  var b = Math.floor(Math.random() * 11); // 0-10
+  return [a + " × " + b + " = ?", a * b];
+}
+
+function generateSquare() {
+  var a = Math.floor(Math.random() * 10); // 0-9
+  return [a + "² = ?", a * a];
+}
+
+function generateSquareRoot() {
+  var a = Math.floor(Math.random() * 10); // 0-9
+  return ["√" + (a * a) + " = ?", a];
+}
+
+function generateSimpleEquation() {
+  // Randomly choose between addition and subtraction
+  var equation = Math.random() > 0.5 ? generateAddition() : generateSubtraction();
+
+  // equation is in the form of ["a +/- b", c]
+  var operands = equation[0].split(' ');
+  var result = equation[1];
+  var replaceIndex = Math.random() > 0.5 ? 0 : 2; // Randomly choose to replace a (index 0) or b (index 2)
+
+  // Replace chosen operand with 'x'
+  var answer = parseInt(operands[replaceIndex]);
+  operands[replaceIndex] = 'x';
+  var question = operands.slice(0,3).join(' ') + " = " + result + "<br>What is x?";
+  console.log(equation, operands, replaceIndex, answer)
+  return [question, answer];
+}
+
+/* DOM manipulation */
+
 $(document).ready(function() {
     let total = 0;
-    let answer = 0;
     let wins = localStorage.getItem('wins') ? parseInt(localStorage.getItem('wins'), 10) : 0;
+    let question, answer;
 
-    const cats = [
-      {
-        id: 'cat_1',
-        value: 1,
-        image: 'images/kitten.png',
-        class: 'kitten',
-        enabled: true,
-      },
-      {
-        id: 'cat_2',
-        value: 5,
-        image: 'images/cat_five_sm.png',
-        class: 'cat',
-        enabled: true,
-      },
-      {
-        id: 'cat_3',
-        value: 10,
-        image: 'images/cat.png',
-        class: 'cat',
-        enabled: true,
-      },
-    ];
-  
-    function generateQuestion() {
-        var a = Math.floor(Math.random() * 10);
-        var b = Math.floor(Math.random() * 10);
-        var sum = a + b;
-
-        // Make sure the sum does not exceed 20
-        if (sum > 25) {
-            return generateQuestion();
-        }
-
-        $('#question').text(a + " + " + b + " = ?");
-        answer = sum;
+    function newQuestion() {
+      [question, answer] = generateQuestion();
+      while(answer === 0) {
+        [question, answer] = generateQuestion();
+      }
+      
+      $('#question').html(question);
     }
 
     function make(cat, location) {
@@ -95,6 +158,11 @@ $(document).ready(function() {
       $('#total').text('');
       $('#bucket').children().remove();
   }
+
+  function skip() {
+      reset();
+      newQuestion();
+  }
   
   function setWins(wins) {
       $('#win-count').text(wins);
@@ -119,7 +187,7 @@ $(document).ready(function() {
           alert('Correct! You are amazing!');
           setWins(++wins);
           reset();
-          generateQuestion();
+          newQuestion();
         } else {
           alert('Whoah... That is not correct, let\'s try again.');
           reset();
@@ -128,6 +196,10 @@ $(document).ready(function() {
   
     $('#reset').click(function() {
       reset();
+    });
+  
+    $('#skip').click(function() {
+      skip();
     });
     
     $('#score').click(function() {
@@ -138,7 +210,7 @@ $(document).ready(function() {
     });
   
     setWins(wins);
-    generateQuestion();
+    newQuestion();
 
     cats.sort((a, b) => b.value - a.value).forEach(cat => make(cat, 'home'));
 });
