@@ -38,6 +38,7 @@ body {
   }
   
   #bucket {
+    position: relative;
     min-height: 200px;
     width: 80%;
     border: 3px solid black;
@@ -56,6 +57,18 @@ body {
     font-size: 1.5em;
     font-family: Fredoka, cursive;
     color: #949494;
+  }
+
+  #bucket #bucket-instructions-arrow {
+    position:absolute;
+    top: -10px;
+    left: 50%;
+  }
+
+  #bucket #bucket-instructions-arrow img {
+    height: 50px;
+    opacity: 0.5;
+    animation: animateUpDown 2s ease-in-out infinite;
   }
   
   #submit,
@@ -106,4 +119,16 @@ body {
     cursor: pointer;
     margin: 20px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  @keyframes animateUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }

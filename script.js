@@ -9,18 +9,21 @@ $(document).ready(function() {
         value: 1,
         image: 'images/kitten.png',
         class: 'kitten',
+        enabled: true,
       },
       {
         id: 'cat_2',
         value: 5,
         image: 'images/cat_five_sm.png',
         class: 'cat',
+        enabled: true,
       },
       {
         id: 'cat_3',
         value: 10,
         image: 'images/cat.png',
         class: 'cat',
+        enabled: true,
       },
     ];
   
