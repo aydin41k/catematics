@@ -29,7 +29,7 @@ const cats = [
  * @returns array [string question, int answer]
  */
 function generateQuestion() {
-  var questionTypes = [
+  const questionTypes = [
       generateAddition,
       generateSubtraction,
       generateMultiplication,
@@ -39,52 +39,55 @@ function generateQuestion() {
   ];
 
   // Randomly select a question type
-  var generate = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+  const generate = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+
   return generate();
 }
 
 function generateAddition() {
-  var a = Math.floor(Math.random() * 16); // 0-15
-  var b = 30 - a; // Ensures sum does not exceed 30
+  const a = Math.floor(Math.random() * 16); // 0-15
+  const b = Math.floor(Math.random() * 16); // 0-15
   return [a + " + " + b + " = ?", a + b];
 }
 
 function generateSubtraction() {
-  var a = Math.floor(Math.random() * 22); // 0-21
-  var b = Math.floor(Math.random() * (a + 1)); // Ensures result is non-negative
+  const a = Math.floor(Math.random() * 22); // 0-21
+  const b = Math.floor(Math.random() * (a + 1)); // Ensures result is non-negative
   return [a + " - " + b + " = ?", a - b];
 }
 
 function generateMultiplication() {
-  var a = Math.floor(Math.random() * 11); // 0-10
-  var b = Math.floor(Math.random() * 11); // 0-10
+  const a = Math.floor(Math.random() * 11); // 0-10
+  const b = Math.floor(Math.random() * 11); // 0-10
   return [a + " × " + b + " = ?", a * b];
 }
 
 function generateSquare() {
-  var a = Math.floor(Math.random() * 10); // 0-9
-  return [a + "² = ?", a * a];
+  const a = Math.floor(Math.random() * 10); // 0-9
+  return [a + "<small>²</small> = ?", a * a];
 }
 
 function generateSquareRoot() {
-  var a = Math.floor(Math.random() * 10); // 0-9
+  const a = Math.floor(Math.random() * 10); // 0-9
   return ["√" + (a * a) + " = ?", a];
 }
 
 function generateSimpleEquation() {
   // Randomly choose between addition and subtraction
-  var equation = Math.random() > 0.5 ? generateAddition() : generateSubtraction();
+  const equation = Math.random() > 0.5 ? generateAddition() : generateSubtraction();
 
   // equation is in the form of ["a +/- b", c]
-  var operands = equation[0].split(' ');
-  var result = equation[1];
-  var replaceIndex = Math.random() > 0.5 ? 0 : 2; // Randomly choose to replace a (index 0) or b (index 2)
+  const operands = equation[0].split(' ');
+  const result = equation[1];
+  const replaceIndex = Math.random() > 0.5 ? 0 : 2; // Randomly choose to replace a (index 0) or b (index 2)
+
+  // Store the chosen operand in a variable - that is our answer
+  const answer = parseInt(operands[replaceIndex]);
 
   // Replace chosen operand with 'x'
-  var answer = parseInt(operands[replaceIndex]);
   operands[replaceIndex] = 'x';
-  var question = operands.slice(0,3).join(' ') + " = " + result + "<br>What is x?";
-  console.log(equation, operands, replaceIndex, answer)
+  const question = operands.slice(0,3).join(' ') + " = " + result + "<br>What is x?";
+
   return [question, answer];
 }
 

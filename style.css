@@ -105,6 +105,10 @@ body {
     color: #0071e3;
     margin: 40px 0 20px;
   }
+
+  #question small {
+    vertical-align: top;
+  }
   
   #score {
     position: absolute;
