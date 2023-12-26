@@ -153,8 +153,7 @@ body {
     width: 100%;
   }
   
-  #no,
-  #confirm-reset {
+  .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -178,6 +177,32 @@ body {
       padding: 20px;
       font-size: 1.3em;
       color: #000;
+  }
+
+  .config-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+  }
+
+  .config-row input[type="number"] {
+    width: 7em;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+  }
+
+  .config-row .config-name {
+    display: flex;
+    align-items: center;
+  }
+
+  #close-config {
+    margin-left: 0;
   }
 
   @keyframes animateUpDown {

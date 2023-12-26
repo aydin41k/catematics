@@ -23,6 +23,14 @@ const cats = [
   },
 ];
 
+const config = {
+  maxAddend: 15,
+  maxMinuend: 21,
+  multiplication: true,
+  sq: true,
+  sqroot: true,
+}
+
 /* Question logic*/
 
 /**
@@ -185,6 +193,21 @@ $(document).ready(function() {
     $('#no').show();
   }
 
+  function syncConfig(config) {
+    // For each config, set the value of the input with the name of the config
+    Object.keys(config).forEach(key => {
+      const value = config[key];
+      const inputField = $(`input[name=${key}]`);
+      if (inputField.attr('type') === 'checkbox') {
+          inputField.bootstrapSwitch('state', value);;
+      } else if (inputField.attr('type') === 'text' || inputField.attr('type') === 'number') {
+          inputField.val(value);
+      }
+    });
+  }
+
+  $('input[type="checkbox"]').bootstrapSwitch();
+
   $('#bucket').droppable({
       drop: function(event, ui) {
           $('.instructions').remove();
@@ -233,7 +256,16 @@ $(document).ready(function() {
     $('#confirm-reset').show();
   });
 
+  $('#config').click(function() {
+    $('#config-modal').show();
+  });
+
+  $('#close-config').click(function() {
+      $('#config-modal').hide();
+  });
+
   setWins(wins);
+  syncConfig(config);
   newQuestion();
 
   cats.sort((a, b) => b.value - a.value).forEach(cat => make(cat, 'home'));

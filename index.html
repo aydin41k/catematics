@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat Bucket Math Game</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css" /> </head>
-
 <body>
     <div id="game">
         <div id="question"></div>
@@ -24,13 +24,13 @@
         <button id="reset" class="button">Reset</button> 
         <button id="skip" class="button">Skip</button> 
         <div id="yes"><img src="images/yes.png"/></div>
-        <div id="no">
+        <div id="no" class="modal">
             <div class="modal-content">
                 <div>Whoah... That is not correct, try again.</div>
                 <button id="try-again" class="button">Okay</button>
             </div>
         </div>
-        <div id="confirm-reset">
+        <div id="confirm-reset" class="modal">
             <div class="modal-content">
                 <div>Are you sure you want to <strong>reset</strong> the score?</div>
                 <button id="sure" class="button">Yes</button>
@@ -40,9 +40,40 @@
     </div>
     <div id="score">Wins: <span id="win-count">0</span></div>
     <div id="config"><img src="images/config.png"/></div>
+
+    <!-- Modal -->
+    <div id="config-modal" class="modal">
+        <div class="modal-content">
+            <h2>Parent stuff</h2>
+            <div class="config-row">
+                <div class="config-name">Max addend value</div>
+                <input name="maxAddend" class="config-value" type="number">
+            </div>
+            <div class="config-row">
+                <div class="config-name">Max minuend value</div>
+                <input name="maxMinuend" class="config-value" type="number">
+            </div>
+            <div class="config-row">
+                <div class="config-name">Multiplication</div>
+                <input name="multiplication" class="config-value" type="checkbox">
+            </div>
+            <div class="config-row">
+                <div class="config-name">Squares</div>
+                <input name="sq" class="config-value" type="checkbox">
+            </div>
+            <div class="config-row">
+                <div class="config-name">Square roots</div>
+                <input name="sqroot" class="config-value" type="checkbox">
+            </div>
+            <button id="close-config" class="button">Close</button>
+        </div>
+    </div>
+    <!-- End Modal -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
