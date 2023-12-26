@@ -20,11 +20,26 @@
                 Move the cats into the bucket to make the total
             </div>
         </div> 
-        <button id="submit">Submit</button>
-        <button id="reset">Reset</button> 
-        <button id="skip">Skip</button> 
+        <button id="submit" class="button">Submit</button>
+        <button id="reset" class="button">Reset</button> 
+        <button id="skip" class="button">Skip</button> 
+        <div id="yes"><img src="images/yes.png"/></div>
+        <div id="no">
+            <div class="modal-content">
+                <div>Whoah... That is not correct, try again.</div>
+                <button id="try-again" class="button">Okay</button>
+            </div>
+        </div>
+        <div id="confirm-reset">
+            <div class="modal-content">
+                <div>Are you sure you want to <strong>reset</strong> the score?</div>
+                <button id="sure" class="button">Yes</button>
+                <button id="not-sure" class="button">No</button>
+            </div>
+        </div> 
     </div>
     <div id="score">Wins: <span id="win-count">0</span></div>
+    <div id="config"><img src="images/config.png"/></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>

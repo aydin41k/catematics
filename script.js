@@ -177,43 +177,64 @@ $(document).ready(function() {
       setWins(0);
   }
 
-    $('#bucket').droppable({
-        drop: function(event, ui) {
-            $('.instructions').remove();
-            ui.draggable[0].remove();
-            addToBucket(findCatById(ui.draggable[0].id))
-        }
-    });
+  function alertCorrect() {
+    $('#yes').show(100).delay(2000).hide(100).delay(500);
+  }
 
-    $('#submit').click(function() {
-        if (total === answer) {
-          alert('Correct! You are amazing!');
-          setWins(++wins);
-          reset();
-          newQuestion();
-        } else {
-          alert('Whoah... That is not correct, let\'s try again.');
-          reset();
-        }
-    });
-  
-    $('#reset').click(function() {
-      reset();
-    });
-  
-    $('#skip').click(function() {
-      skip();
-    });
-    
-    $('#score').click(function() {
-        const resetConfirmed = confirm("Are you sure you want to reset the score?");
-        if (resetConfirmed) {
-            resetWins();
-        }
-    });
-  
-    setWins(wins);
-    newQuestion();
+  function alertIncorrect() {
+    $('#no').show();
+  }
 
-    cats.sort((a, b) => b.value - a.value).forEach(cat => make(cat, 'home'));
+  $('#bucket').droppable({
+      drop: function(event, ui) {
+          $('.instructions').remove();
+          ui.draggable[0].remove();
+          addToBucket(findCatById(ui.draggable[0].id))
+      }
+  });
+
+  $('#submit').click(function() {
+      if (total === answer) {
+        alertCorrect();
+
+        $('#yes').promise().then(function() {
+            setWins(++wins);
+            reset();
+            newQuestion();
+        });
+      } else {
+        alertIncorrect();
+        reset();
+      }
+  });
+
+  $('#reset').click(function() {
+    reset();
+  });
+
+  $('#skip').click(function() {
+    skip();
+  });
+
+  $('#try-again').click(function() {
+    $('#no').hide();
+  });
+
+  $('#confirm-reset #sure').click(function() {
+    resetWins();
+    $('#confirm-reset').hide();
+  });
+
+  $('#confirm-reset #not-sure').click(function() {
+    $('#confirm-reset').hide();
+  });
+  
+  $('#score').click(function() {
+    $('#confirm-reset').show();
+  });
+
+  setWins(wins);
+  newQuestion();
+
+  cats.sort((a, b) => b.value - a.value).forEach(cat => make(cat, 'home'));
 });

@@ -3,12 +3,15 @@ body {
     background-color: #f5f5f7; /* Light gray background, common in Apple's design */
     font-family: 'Helvetica Neue', Arial, sans-serif; /* Apple-like typography */
     color: #333; /* Dark text for readability */
-    margin: 0;
     padding: 0;
+    max-width: 768px;
+    margin: 0 auto;
+    position: relative;
   }
   
   #game {
-      text-align: center;
+    position: relative;
+    text-align: center;
     padding: 20px;
   }
   
@@ -62,7 +65,7 @@ body {
   #bucket #bucket-instructions-arrow {
     position:absolute;
     top: -10px;
-    left: 50%;
+    left: calc(50% - 25px);
   }
 
   #bucket #bucket-instructions-arrow img {
@@ -71,9 +74,7 @@ body {
     animation: animateUpDown 2s ease-in-out infinite;
   }
   
-  #submit,
-  #reset,
-  #skip {
+  .button {
     background-image: linear-gradient(to bottom, #0071e3, #005cb9); /* Blue gradient */
     color: #fff; /* White text */
     border: none; /* No border */
@@ -110,20 +111,73 @@ body {
     vertical-align: top;
   }
   
-  #score {
+  #score,
+  #config {
     position: absolute;
     top: 10px;
-    right: 10px;
-    background-image: linear-gradient(to bottom, #ff9900, #6600cc); /* Blue gradient */
     color: #fff; /* White text */
     border: none; /* No border */
     border-radius: 10px; /* Rounded corners for the button */
-    padding: 10px 20px;
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;
     margin: 20px;
+  }
+  
+  #score {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    right: 10px;
+    background-image: linear-gradient(to bottom, #ff9259, #17bdec); /* Blue gradient */
+    padding: 10px 20px;
+  }
+
+  #config {
+    left: 10px;
+  }
+
+  #config img {
+    height: 40px;
+  }
+
+  #yes{
+    position: absolute;
+    display: none;
+    top:calc(50% - 120px);
+    left: 25%;
+    width: 50%;
+    z-index: 999;
+    animation: appearFromCenter 0.5s;
+  }
+  
+  #yes img {
+    width: 100%;
+  }
+  
+  #no,
+  #confirm-reset {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+  }
+
+  /* Modal Content/Box */
+  .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      border-radius: 10px;
+      max-width: 550px; /* Could be more or less, depending on screen size */
+      padding: 20px;
+      font-size: 1.3em;
+      color: #000;
   }
 
   @keyframes animateUpDown {
@@ -137,3 +191,14 @@ body {
       transform: translateY(0);
     }
   }
+
+  @keyframes appearFromCenter {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
