@@ -12,6 +12,10 @@ body {
   /* splash screen */
   .splash {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     top: 0;
     left: 0;
     width: 100%;
@@ -20,7 +24,6 @@ body {
     z-index: 200;
     color: white;
     text-align: center;
-    line-height: 90vh;
   }
 
   .splash.display-none {
@@ -36,6 +39,10 @@ body {
     text-align: center;
     line-height: 90vh;
     transition: 1s;
+  }
+
+  .splash h1 {
+    margin-bottom: 10vh;
   }
 
   @keyframes fadeIn {
