@@ -185,21 +185,23 @@ $(document).ready(function() {
   }
   
   function setWins(wins) {
-    let result = ''
-
+    let result = '0'
     if(wins > 0) {
       result = wins
     }
 
     if(wins > 10) {
       const extraWins = wins - 10;
-      result = `10 +  ${extraWins}`
+      result = `10 + ${extraWins}`
     }
 
     if(wins >= 20) {
-      const roundNumber = Number(wins.toString().slice(0, 1))
-      const extraNumber = wins - (10 * roundNumber)
-      result = `10 x ${roundNumber}` + (extraNumber !== 0 ? ' + ' + extraNumber : '')
+      const winsString = wins.toString()
+      const winsNumberLength = winsString.length;
+      const roundNumber = wins.toString().slice(0, winsNumberLength - 1)
+      const extraNumber = wins % 10
+      console.log(extraNumber)
+      result = `${roundNumber} x 10` + (extraNumber !== 0 ? ' + ' + extraNumber : '')
     }
 
     $('#win-count').text(result);
@@ -290,7 +292,7 @@ $(document).ready(function() {
       $('#config-modal').hide();
   });
 
-  setWins(wins);
+  setWins(12);
   syncConfig(config);
   newQuestion();
 
