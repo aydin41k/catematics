@@ -292,7 +292,7 @@ $(document).ready(function() {
       $('#config-modal').hide();
   });
 
-  setWins(12);
+  setWins(wins);
   syncConfig(config);
   newQuestion();
 
