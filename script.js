@@ -185,8 +185,27 @@ $(document).ready(function() {
   }
   
   function setWins(wins) {
-      $('#win-count').text(wins);
-      localStorage.setItem('wins', wins);
+    let result = '0'
+    if(wins > 0) {
+      result = wins
+    }
+
+    if(wins > 10) {
+      const extraWins = wins - 10;
+      result = `10 + ${extraWins}`
+    }
+
+    if(wins >= 20) {
+      const winsString = wins.toString()
+      const winsNumberLength = winsString.length;
+      const roundNumber = wins.toString().slice(0, winsNumberLength - 1)
+      const extraNumber = wins % 10
+      console.log(extraNumber)
+      result = `${roundNumber} x 10` + (extraNumber !== 0 ? ' + ' + extraNumber : '')
+    }
+
+    $('#win-count').text(result);
+    localStorage.setItem('wins', wins);
   }
    
   function resetWins() {
