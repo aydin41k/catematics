@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://coderoo.com.au/projects/sarasoft/images/kitten.png" alt="Kitten Logo" height="100"/>
+  <img src="https://coderoo.com.au/projects/sarasoft/images/kitten_lg.png" alt="Kitten Logo" height="100"/>
 </p>
 
 # Catematics 🐾🔢
