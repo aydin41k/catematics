@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://coderoo.com.au/projects/sarasoft/kitten.png" alt="Kitten Logo" height="100"/>
+  <img src="https://coderoo.com.au/projects/sarasoft/images/kitten.png" alt="Kitten Logo" height="100"/>
 </p>
 
 # Catematics 🐾🔢
@@ -9,9 +9,10 @@ Kids need to practice maths. They don't like homeworks. Instead, they like their
 ## How to Play 🎮
 
 - Go to our glorious website: http://sara.salimova.site
-- Each round, you'll be presented with an addition problem that doesn't exceed the sum of 25.
-- To answer, simply drag the appropriate number of big cats (worth 10) and small kittens (worth 1) into the bucket.
+- Each round, you'll be presented with an addition problem (complexity level is in the settings).
+- To answer, simply drag the appropriate number of big cats (worth 10), medium cats (worth 5) and small kittens (worth 1) into the bucket.
 - Hit the "Submit" button to check your answer. If you get it right, you earn a win! If not, try again!
+- ...or skip if you are not sure.
 - Your total wins are tracked and saved, so you can see how much you've improved over time.
 
 ## Features 🌟
