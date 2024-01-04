@@ -202,18 +202,22 @@ $(document).ready(function () {
       result = wins
     }
 
-    if(wins > 10) {
-      const extraWins = wins - 10;
-      result = `10 + ${extraWins}`
-    }
+    // If we are generating multiplication questions, then display the wins mathematically
+    if (config.generateMultiplication.value) {
 
-    if(wins >= 20) {
-      const winsString = wins.toString()
-      const winsNumberLength = winsString.length;
-      const roundNumber = wins.toString().slice(0, winsNumberLength - 1)
-      const extraNumber = wins % 10
-      console.log(extraNumber)
-      result = `${roundNumber} x 10` + (extraNumber !== 0 ? ' + ' + extraNumber : '')
+      if(wins > 10) {
+        const extraWins = wins - 10;
+        result = `10 + ${extraWins}`
+      }
+
+      if(wins >= 20) {
+        const winsString = wins.toString()
+        const winsNumberLength = winsString.length;
+        const roundNumber = wins.toString().slice(0, winsNumberLength - 1)
+        const extraNumber = wins % 10
+        console.log(extraNumber)
+        result = `${roundNumber} x 10` + (extraNumber !== 0 ? ' + ' + extraNumber : '')
+      }
     }
 
     $('#win-count').text(result);
