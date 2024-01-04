@@ -33,11 +33,15 @@ const cats = [
 ];
 
 const config = {
-  maxAddend: 15,
-  maxMinuend: 21,
-  multiplication: true,
-  sq: true,
-  sqroot: true,
+  maxAddend: { title: 'Max addend', type: 'number', value: 15 },
+  maxMinuend: { title: 'Max minuend', type: 'number', value: 21 },
+  maxMultiplier: { title: 'Max multiplier', type: 'number', value: 10 },
+  generateAddition: { title: 'Additions', type: 'checkbox', value: true },
+  generateSubtraction: { title: 'Subtractions', type: 'checkbox', value: true },
+  generateMultiplication: { title: 'Multiplications', type: 'checkbox', value: true },
+  generateSquare: { title: 'Squares', type: 'checkbox', value: true },
+  generateSquareRoot: { title: 'Square roots', type: 'checkbox', value: true },
+  generateSimpleEquation: { title: 'Equations', type: 'checkbox', value: true },
 }
 
 /* Question logic*/
@@ -47,45 +51,53 @@ const config = {
  */
 function generateQuestion() {
   const questionTypes = [
-      generateAddition,
-      generateSubtraction,
-      generateMultiplication,
-      generateSquare,
-      generateSquareRoot,
-      generateSimpleEquation
+    generateAddition,
+    generateSubtraction,
+    generateMultiplication,
+    generateSquare,
+    generateSquareRoot,
+    generateSimpleEquation
   ];
 
+  // Filter out disabled question types
+  const enabledQuestionTypes = questionTypes.filter(questionType => {
+    return config[questionType.name].value;
+  });
+
   // Randomly select a question type
-  const generate = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+  const generate = enabledQuestionTypes[Math.floor(Math.random() * enabledQuestionTypes.length)];
 
   return generate();
 }
 
 function generateAddition() {
-  const a = Math.floor(Math.random() * 16); // 0-15
-  const b = Math.floor(Math.random() * 16); // 0-15
+  const maxAddendCeil = config.maxAddend.value + 1;
+  const a = Math.floor(Math.random() * maxAddendCeil); // 0 to maxAddend
+  const b = Math.floor(Math.random() * maxAddendCeil); // 0 to maxAddend
   return [a + " + " + b + " = ?", a + b];
 }
 
 function generateSubtraction() {
-  const a = Math.floor(Math.random() * 22); // 0-21
+  const maxMinuendCeil = config.maxMinuend.value + 1;
+  const a = Math.floor(Math.random() * maxMinuendCeil); // 0 to maxMinuend
   const b = Math.floor(Math.random() * (a + 1)); // Ensures result is non-negative
   return [a + " - " + b + " = ?", a - b];
 }
 
 function generateMultiplication() {
-  const a = Math.floor(Math.random() * 11); // 0-10
-  const b = Math.floor(Math.random() * 11); // 0-10
+  const maxMultiplierCeil = config.maxMultiplier.value + 1;
+  const a = Math.floor(Math.random() * maxMultiplierCeil); // 0 to maxMultiplier
+  const b = Math.floor(Math.random() * maxMultiplierCeil); // 0 to maxMultiplier
   return [a + " × " + b + " = ?", a * b];
 }
 
 function generateSquare() {
-  const a = Math.floor(Math.random() * 10); // 0-9
+  const a = Math.floor(Math.random() * config.maxMultiplier.value); // 0 to maxMultiplier - 1
   return [a + "<small>²</small> = ?", a * a];
 }
 
 function generateSquareRoot() {
-  const a = Math.floor(Math.random() * 10); // 0-9
+  const a = Math.floor(Math.random() * config.maxMultiplier.value); // 0 to maxMultiplier - 1
   return ["√" + (a * a) + " = ?", a];
 }
 
@@ -103,95 +115,95 @@ function generateSimpleEquation() {
 
   // Replace chosen operand with 'x'
   operands[replaceIndex] = 'x';
-  const question = operands.slice(0,3).join(' ') + " = " + result + "<br>What is x?";
+  const question = operands.slice(0, 3).join(' ') + " = " + result + "<br>What is x?";
 
   return [question, answer];
 }
 
 /* DOM manipulation */
 
-$(document).ready(function() {
-    let total = 0;
-    let wins = localStorage.getItem('wins') ? parseInt(localStorage.getItem('wins'), 10) : 0;
-    let question, answer;
+$(document).ready(function () {
+  let total = 0;
+  let wins = localStorage.getItem('wins') ? parseInt(localStorage.getItem('wins'), 10) : 0;
+  let question, answer;
 
-    function newQuestion() {
+  function newQuestion() {
+    [question, answer] = generateQuestion();
+    while (answer === 0) {
       [question, answer] = generateQuestion();
-      while(answer === 0) {
-        [question, answer] = generateQuestion();
-      }
-      
-      $('#question').html(question);
     }
 
-    function make(cat, location) {
-      const {id, value, image} = cat;
+    $('#question').html(question);
+  }
 
-        // Create the div element with id and class
-        var catDiv = $('<div>', {
-            id,
-        });
+  function make(cat, location) {
+    const { id, value, image } = cat;
 
-        // Create the image element with its source
-        var catImg = $('<img>', {
-            src: image,
-        });
+    // Create the div element with id and class
+    var catDiv = $('<div>', {
+      id,
+    });
 
-        catDiv.append(catImg);
-        catDiv.draggable({revert:'invalid'})
+    // Create the image element with its source
+    var catImg = $('<img>', {
+      src: image,
+    });
 
-      switch(location) {
-        case 'home':
-          // Add the div to the #catContainer
-          // if there is $('#' + cat.id), then append catDiv to it; otherwise create it and append
-          if ($('#' + cat.id + '_container').length) {
-            $('#' + cat.id + '_container').append(catDiv);
-          } else {
-            const catContainer = $('<div>', {id: cat.id + '_container', class: 'cat-container'});
-            catContainer.append(catDiv);
-            $('#cats').append(catContainer);
-          }
-          break;
-        case 'bucket':
-          // Add the div to the #catContainer
-          $('#bucket').append(catDiv);
-          break;
-        default:
-          return;
-      }
+    catDiv.append(catImg);
+    catDiv.draggable({ revert: 'invalid' })
+
+    switch (location) {
+      case 'home':
+        // Add the div to the #catContainer
+        // if there is $('#' + cat.id), then append catDiv to it; otherwise create it and append
+        if ($('#' + cat.id + '_container').length) {
+          $('#' + cat.id + '_container').append(catDiv);
+        } else {
+          const catContainer = $('<div>', { id: cat.id + '_container', class: 'cat-container' });
+          catContainer.append(catDiv);
+          $('#cats').append(catContainer);
+        }
+        break;
+      case 'bucket':
+        // Add the div to the #catContainer
+        $('#bucket').append(catDiv);
+        break;
+      default:
+        return;
     }
-  
+  }
+
   function addToBucket(cat) {
     make(cat, 'bucket');
     make(cat, 'home');
-    
+
     total += cat.value;
     $('#total').text('').text(total);
   }
-  
+
   function findCatById(id) {
     return cats.find(cat => cat.id === id);
   }
 
   function reset() {
-      total = 0;
-      $('#total').text('');
-      $('#bucket').children().remove();
+    total = 0;
+    $('#total').text('');
+    $('#bucket').children().remove();
   }
 
   function skip() {
-      reset();
-      newQuestion();
+    reset();
+    newQuestion();
   }
-  
+
   function setWins(wins) {
-      $('#win-count').text(wins);
-      localStorage.setItem('wins', wins);
+    $('#win-count').text(wins);
+    localStorage.setItem('wins', wins);
   }
-   
+
   function resetWins() {
-      wins = 0;
-      setWins(0);
+    wins = 0;
+    setWins(0);
   }
 
   function alertCorrect() {
@@ -202,78 +214,96 @@ $(document).ready(function() {
     $('#no').show();
   }
 
-  function syncConfig(config) {
-    // For each config, set the value of the input with the name of the config
+  function genConfig(config) {
     Object.keys(config).forEach(key => {
-      const value = config[key];
-      const inputField = $(`input[name=${key}]`);
-      if (inputField.attr('type') === 'checkbox') {
-          inputField.bootstrapSwitch('state', value);;
-      } else if (inputField.attr('type') === 'text' || inputField.attr('type') === 'number') {
-          inputField.val(value);
-      }
+      const configRow = $('<div>', { class: 'config-row' });
+      const configName = $('<div>', { class: 'config-name' });
+      const configValue = $('<input>', { name: key, class: 'config-value', type: config[key].type, attr: { disabled: 'disabled' } });
+      configName.text(config[key].title);
+      configRow.append(configName);
+      configRow.append(configValue);
+      $('#config-modal #config-modal-body').append(configRow);
     });
   }
 
-  $('input[type="checkbox"]').bootstrapSwitch();
+  function syncConfig(config) {
+    // For each config, set the value of the input with the name of the config
+    Object.keys(config).forEach(key => {
+      const value = config[key].value;
+      console.log(key, value)
+      const inputField = $(`input[name=${key}]`);
+      console.log(inputField)
+      if (inputField.attr('type') === 'checkbox') {
+        inputField.prop('checked', value);
+      } else if (inputField.attr('type') === 'text' || inputField.attr('type') === 'number') {
+        inputField.val(value);
+      }
+
+      inputField.change(function () {
+        const value = inputField.val();
+        config[key].value = value;
+      });
+    });
+  }
 
   $('#bucket').droppable({
-      drop: function(event, ui) {
-          $('.instructions').remove();
-          ui.draggable[0].remove();
-          addToBucket(findCatById(ui.draggable[0].id))
-      }
+    drop: function (event, ui) {
+      $('.instructions').remove();
+      ui.draggable[0].remove();
+      addToBucket(findCatById(ui.draggable[0].id))
+    }
   });
 
-  $('#submit').click(function() {
-      if (total === answer) {
-        alertCorrect();
+  $('#submit').click(function () {
+    if (total === answer) {
+      alertCorrect();
 
-        $('#yes').promise().then(function() {
-            setWins(++wins);
-            reset();
-            newQuestion();
-        });
-      } else {
-        alertIncorrect();
+      $('#yes').promise().then(function () {
+        setWins(++wins);
         reset();
-      }
+        newQuestion();
+      });
+    } else {
+      alertIncorrect();
+      reset();
+    }
   });
 
-  $('#reset').click(function() {
+  $('#reset').click(function () {
     reset();
   });
 
-  $('#skip').click(function() {
+  $('#skip').click(function () {
     skip();
   });
 
-  $('#try-again').click(function() {
+  $('#try-again').click(function () {
     $('#no').hide();
   });
 
-  $('#confirm-reset #sure').click(function() {
+  $('#confirm-reset #sure').click(function () {
     resetWins();
     $('#confirm-reset').hide();
   });
 
-  $('#confirm-reset #not-sure').click(function() {
+  $('#confirm-reset #not-sure').click(function () {
     $('#confirm-reset').hide();
   });
-  
-  $('#score').click(function() {
+
+  $('#score').click(function () {
     $('#confirm-reset').show();
   });
 
-  $('#config').click(function() {
+  $('#config').click(function () {
     $('#config-modal').show();
   });
 
-  $('#close-config').click(function() {
-      $('#config-modal').hide();
+  $('#close-config').click(function () {
+    $('#config-modal').hide();
   });
 
   setWins(wins);
+  genConfig(config);
   syncConfig(config);
   newQuestion();
 

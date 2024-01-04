@@ -1,276 +1,330 @@
 body {
-    height: 100vh;
-    background-color: #f5f5f7; /* Light gray background, common in Apple's design */
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Apple-like typography */
-    color: #333; /* Dark text for readability */
-    padding: 0;
-    max-width: 768px;
-    margin: 0 auto;
-    position: relative;
+  height: 100vh;
+  background-color: #f5f5f7;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  padding: 0;
+  max-width: 768px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* splash screen */
+.splash {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #0071e3;
+  z-index: 200;
+  color: white;
+  text-align: center;
+}
+
+.splash.display-none {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #0071e3;
+  z-index: -10;
+  color: white;
+  text-align: center;
+  line-height: 90vh;
+  transition: 1s;
+}
+
+.splash h1 {
+  margin-bottom: 10vh;
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease-in forwards;
+}
+
+#game {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+}
+
+#cats {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cat-container {
+  height: 120px;
+  display: flex;
+  align-items: end;
+}
+
+#cats>div>div {
+  margin: 0 10px;
+}
+
+.cat-container>div {
+  cursor: pointer;
+  margin: auto 10px;
+}
+
+#cats img {
+  vertical-align: bottom;
+}
+
+#bucket {
+  position: relative;
+  min-height: 200px;
+  width: 80%;
+  border: 3px solid black;
+  border-top: 1px dashed black;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 1px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#bucket #bucket-instructions {
+  width: 100%;
+  margin: 20px auto;
+  font-size: 1.5em;
+  font-family: Fredoka, cursive;
+  color: #949494;
+}
+
+#bucket #bucket-instructions-arrow {
+  position: absolute;
+  top: -10px;
+  left: calc(50% - 25px);
+}
+
+#bucket #bucket-instructions-arrow img {
+  height: 50px;
+  opacity: 0.5;
+  animation: animateUpDown 2s ease-in-out infinite;
+}
+
+.button {
+  background-image: linear-gradient(to bottom, #0071e3, #005cb9);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100px;
+}
+
+#submit:hover,
+#reset:hover {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+
+#question,
+#total {
+  font-size: 2em;
+  margin: 0 auto;
+  padding: 10px 0;
+  color: #0071e3;
+}
+
+#question {
+  font-family: Fredoka, cursive;
+  font-size: 3em;
+  color: #0071e3;
+  margin: 40px 0 20px;
+}
+
+#question small {
+  vertical-align: top;
+}
+
+#score,
+#config {
+  position: absolute;
+  top: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 20px;
+}
+
+#score {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  right: 10px;
+  background-image: linear-gradient(to bottom, #ff9259, #17bdec);
+  padding: 10px 20px;
+}
+
+#config {
+  left: 10px;
+}
+
+#config img {
+  height: 40px;
+}
+
+#yes {
+  position: absolute;
+  display: none;
+  top: calc(50% - 120px);
+  left: 25%;
+  width: 50%;
+  z-index: 999;
+  animation: appearFromCenter 0.5s;
+}
+
+#yes img {
+  width: 100%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  border-radius: 10px;
+  max-width: 550px;
+  padding: 20px;
+  font-size: 1.3em;
+  color: #000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#config-modal {
+  font-size: 16px;
+}
+
+#config-modal .modal-content {
+  width: calc(100% - 40px);
+  max-width: 800px;
+  border: 10px solid #f3f6d5;
+  padding: 0;
+  background-color: #f3f5d7;
+}
+
+#config-modal .modal-header {
+  width: 100%;
+  overflow: hidden;
+}
+
+#config-modal .modal-header img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+#config-modal #config-modal-body {
+  margin: 10px 0;
+  background-color: #01b5a6;
+  padding: 10px;
+  border-radius: 20px;
+  border: 10px solid #1fe6c9;
+}
+
+.config-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.config-row input {
+  width: 7em;
+  background-color: #f8f8f8;
+}
+
+.config-row input[type="number"] {
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border: 2px solid #d0d0d0;
+  border-radius: 15px;
+}
+
+.config-row input[type="checkbox"] {
+  margin: 0;
+}
+
+.config-row .config-name {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 7em);
+  padding: 8px 12px;
+  border: 2px solid #d0d0d0;
+  border-radius: 15px;
+  background-color: #f8f8f8;
+}
+
+#close-config {
+  margin-left: 0;
+  background-image: linear-gradient(to bottom, #ffaf2e, #fe982a);
+  border-radius: 14px;
+  font-size: 16px;
+}
+
+#close-config:hover {
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  font-size: 1.1em;
+}
+
+@keyframes animateUpDown {
+  0% {
+    transform: translateY(0);
   }
 
-  /* splash screen */
-  .splash {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #0071e3;
-    z-index: 200;
-    color: white;
-    text-align: center;
+  50% {
+    transform: translateY(-5px);
   }
 
-  .splash.display-none {
-    position: fixed;
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes appearFromCenter {
+  0% {
     opacity: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #0071e3;
-    z-index: -10;
-    color: white;
-    text-align: center;
-    line-height: 90vh;
-    transition: 1s;
+    transform: scale(0);
   }
 
-  .splash h1 {
-    margin-bottom: 10vh;
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
+}
 
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
-
-  .fade-in {
-    opacity: 0;
-    animation: fadeIn 1s ease-in forwards;
-  }
-
-  #game {
-    position: relative;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  #cats {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  
-  .cat-container {
-    height: 120px;
-    display: flex;
-    align-items: end;
-  }
-  
-  #cats > div > div {
-    margin: 0 10px;
-  }
-  
-  .cat-container > div {
-    cursor: pointer;
-    margin: auto 10px;
-  }
-  
-  #cats img {
-    vertical-align: bottom;
-  }
-  
-  #bucket {
-    position: relative;
-    min-height: 200px;
-    width: 80%;
-    border: 3px solid black;
-    border-top: 1px dashed black;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    box-shadow: 1px 10px 20px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
-  }
-
-  #bucket #bucket-instructions {
-    width: 100%;
-    margin: 20px auto;
-    font-size: 1.5em;
-    font-family: Fredoka, cursive;
-    color: #949494;
-  }
-
-  #bucket #bucket-instructions-arrow {
-    position:absolute;
-    top: -10px;
-    left: calc(50% - 25px);
-  }
-
-  #bucket #bucket-instructions-arrow img {
-    height: 50px;
-    opacity: 0.5;
-    animation: animateUpDown 2s ease-in-out infinite;
-  }
-  
-  .button {
-    background-image: linear-gradient(to bottom, #0071e3, #005cb9); /* Blue gradient */
-    color: #fff; /* White text */
-    border: none; /* No border */
-    border-radius: 20px; /* Rounded corners for the button */
-    padding: 10px 20px;
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  #submit:hover,
-  #reset:hover {
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
-  }
-  
-  #question,
-  #total {
-    font-size: 2em;
-    margin: 0 auto;
-    padding: 10px 0;
-    color: #0071e3;
-  }
-  
-  #question {
-    font-family: Fredoka, cursive;
-    font-size: 3em;
-    color: #0071e3;
-    margin: 40px 0 20px;
-  }
-
-  #question small {
-    vertical-align: top;
-  }
-  
-  #score,
-  #config {
-    position: absolute;
-    top: 10px;
-    color: #fff; /* White text */
-    border: none; /* No border */
-    border-radius: 10px; /* Rounded corners for the button */
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 20px;
-  }
-  
-  #score {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    right: 10px;
-    background-image: linear-gradient(to bottom, #ff9259, #17bdec); /* Blue gradient */
-    padding: 10px 20px;
-  }
-
-  #config {
-    left: 10px;
-  }
-
-  #config img {
-    height: 40px;
-  }
-
-  #yes{
-    position: absolute;
-    display: none;
-    top:calc(50% - 120px);
-    left: 25%;
-    width: 50%;
-    z-index: 999;
-    animation: appearFromCenter 0.5s;
-  }
-  
-  #yes img {
-    width: 100%;
-  }
-  
-  .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
-  }
-
-  /* Modal Content/Box */
-  .modal-content {
-      background-color: #fefefe;
-      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-      border: 1px solid #888;
-      border-radius: 10px;
-      max-width: 550px; /* Could be more or less, depending on screen size */
-      padding: 20px;
-      font-size: 1.3em;
-      color: #000;
-  }
-
-  .config-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-  }
-
-  .config-row input[type="number"] {
-    width: 7em;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    font-size: 16px;
-  }
-
-  .config-row .config-name {
-    display: flex;
-    align-items: center;
-  }
-
-  #close-config {
-    margin-left: 0;
-  }
-
-  @keyframes animateUpDown {
-    0% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-5px);
-    }
-    100% {
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes appearFromCenter {
-    0% {
-        opacity: 0;
-        transform: scale(0);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
 }
