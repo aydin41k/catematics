@@ -26,6 +26,16 @@ Kids need to practice maths. They don't like homeworks. Instead, they like their
 
 So simple that instructions are excessive. Until we move to React, that is.
 
+## Credits
+
+Development and design: Sara Salimova
+
+Engineering: 
+
+[![](https://github.com/aydin41k.png?size=50)](https://github.com/aydin41k)
+[![](https://github.com/Sabbirfeni.png?size=50)](https://github.com/Sabbirfeni)
+[![](https://github.com/RicardoHaranoP.png?size=50)](https://github.com/RicardoHaranoP)
+
 ## Contributing 🤝
 
 How to PR: https://help.github.com/en/articles/creating-a-pull-request
