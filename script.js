@@ -7,6 +7,27 @@ document.addEventListener('DOMContentLoaded', (e) => {
   }, 2000)
 })
 
+/* Log Activity */
+var logQueue = [];
+
+function addToLog(question, answer, correctness, timestamp) {
+  const currentDate = new Date(timestamp);
+
+
+  let logQueue = localStorage.getItem("logActivity") ?JSON.parse(localStorage.getItem("logActivity")) : []; //get the array from LS
+  if (logQueue.length == 100)    //check size
+    logQueue.shift()             //remove the oldest value
+  logQueue.push({
+    Q: question,
+    A: answer,
+    correctness: correctness,
+    timestamp: currentDate.toUTCString()
+  });  //insert new value
+  localStorage.setItem("logActivity", JSON.stringify(logQueue));
+}
+
+
+
 /* Cats */
 const cats = [
   {
@@ -192,25 +213,26 @@ $(document).ready(function () {
   }
 
   function skip() {
+    addToLog(question, answer, "Skipped", Date.now());
     reset();
     newQuestion();
   }
 
   function setWins(wins) {
     let result = '0'
-    if(wins > 0) {
+    if (wins > 0) {
       result = wins
     }
 
     // If we are generating multiplication questions, then display the wins mathematically
     if (config.generateMultiplication.value) {
 
-      if(wins > 10) {
+      if (wins > 10) {
         const extraWins = wins - 10;
         result = `10 + ${extraWins}`
       }
 
-      if(wins >= 20) {
+      if (wins >= 20) {
         const winsString = wins.toString()
         const winsNumberLength = winsString.length;
         const roundNumber = wins.toString().slice(0, winsNumberLength - 1)
@@ -279,7 +301,10 @@ $(document).ready(function () {
 
   $('#submit').click(function () {
     if (total === answer) {
-      alertCorrect();
+      {
+        alertCorrect();
+        addToLog(question, answer, true, Date.now());
+      }
 
       $('#yes').promise().then(function () {
         setWins(++wins);
@@ -287,6 +312,7 @@ $(document).ready(function () {
         newQuestion();
       });
     } else {
+      addToLog(question, answer, false, Date.now());
       alertIncorrect();
       reset();
     }
