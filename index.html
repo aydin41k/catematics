@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cat Bucket Math Game</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css" /> </head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/css/bootstrap3/bootstrap-switch.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
 <body>
 
     <!-- splash screen -->
     <div class="splash">
-        <img src="images/cat.png" alt="cat" class="fade-in"/>
+        <img src="images/cat.png" alt="cat" class="fade-in" />
         <h1 class="fade-in">Catematics</h1>
     </div>
 
@@ -26,11 +30,11 @@
             <div id="bucket-instructions" class="instructions">
                 Move the cats into the bucket to make the total
             </div>
-        </div> 
+        </div>
         <button id="submit" class="button">Submit</button>
-        <button id="reset" class="button">Reset</button> 
-        <button id="skip" class="button">Skip</button> 
-        <div id="yes"><img src="images/yes.png"/></div>
+        <button id="reset" class="button">Reset</button>
+        <button id="skip" class="button">Skip</button>
+        <div id="yes"><img src="images/yes.png" /></div>
         <div id="no" class="modal">
             <div class="modal-content">
                 <div>Whoah... That is not correct, try again.</div>
@@ -43,16 +47,23 @@
                 <button id="sure" class="button">Yes</button>
                 <button id="not-sure" class="button">No</button>
             </div>
-        </div> 
+        </div>
     </div>
     <div id="score">Wins: <span id="win-count">0</span></div>
-    <div id="config"><img src="images/config.png"/></div>
+    <div id="config"><img src="images/config.png" /></div>
+    <!-- Show Log -->
+    <button id="showLog" class="button">Show my activity</button>
+    <div id="logContainer" style="display:none;">
+        <div id="closeButton">X</div>
+      </div>
+      
+
 
     <!-- Modal -->
     <div id="config-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <img src="images/config-popup-header.jpg"/>
+                <img src="images/config-popup-header.jpg" />
             </div>
             <div id="config-modal-body"></div>
             <button id="close-config" class="button">Close</button>
@@ -62,8 +73,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/3.3.4/js/bootstrap-switch.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
