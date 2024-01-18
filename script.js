@@ -30,17 +30,20 @@ function addToLog(question, answer, correctness, timestamp) {
 /* Show Log */
 const showLogButton = document.querySelector('#showLog');
 const logContainer = document.querySelector('#logContainer');
- logQueue = localStorage.getItem("logActivity") ?
+const closeButton = document.querySelector('#closeButton');
+const clearButton = document.querySelector('#clearLogButton');
+
+
+logQueue = localStorage.getItem("logActivity") ?
   JSON.parse(localStorage.getItem("logActivity")) :
   [];
 
-let logContainerIsVisible = false;
 
 showLogButton.addEventListener("click", () => {
-  logContainer.innerHTML = ""; // Clear previous content
-
+  logContainer.innerHTML = "My last 100 tries"; // Clear previous content
   logQueue.map((object) => {
     const active = document.createElement('ul');
+    active.classList.add('active');
     active.innerHTML = `
       <li>Question: ${object.Q}</li>
       <li>Answer: ${object.A}</li>
@@ -49,46 +52,36 @@ showLogButton.addEventListener("click", () => {
     `;
     logContainer.appendChild(active);
   });
-
-  const closeButton = document.createElement('div');
-  closeButton.id = 'closeButton';
-  closeButton.innerText = 'X';
-  closeButton.addEventListener('click', () => {
-    logContainer.style.display = 'none';
-    logContainerIsVisible = false;
-  });
-
-  logContainer.appendChild(closeButton);
-
-  // Show the clear button only when logContainer is displayed
-  const clearButton = document.createElement('button');
-  clearButton.innerText = 'Clear Log';
-  clearButton.style.display = 'none'; // Initially hide the clear button
-
-  clearButton.addEventListener('click', () => {
-    logContainer.innerHTML = "";
-    localStorage.removeItem("logActivity");
-    clearButton.style.display = 'none'; // Hide the clear button after clearing the log
-  });
-
-  logContainer.appendChild(clearButton);
-
   logContainer.style.display = "flex";
-  logContainerIsVisible = true;
   closeButton.style.display = "block";
   clearButton.style.display = "block";
 });
 
-// Add an event listener to hide the close and clear buttons when logContainer is hidden
-logContainer.addEventListener('transitionend', () => {
-  if (!logContainerIsVisible) {
-    document.querySelector('#closeButton').style.display = 'none';
-    document.querySelector('button').style.display = 'none'; // Assuming there's only one button
-  } else {
-    document.querySelector('#closeButton').style.display = 'block';
-    document.querySelector('button').style.display = 'block'; // Assuming there's only one button
-  }
+closeButton.addEventListener('click', () => {
+  logContainer.style.display = 'none';
+  closeButton.style.display = "none";
+  clearButton.style.display = "none";
 });
+
+clearButton.addEventListener('click', () => {
+  logContainer.innerHTML = "";
+  localStorage.removeItem("logActivity");
+  logContainer.style.display = 'none';
+  closeButton.style.display = "none";
+  clearButton.style.display = "none";
+});
+
+
+// // Add an event listener to hide the close and clear buttons when logContainer is hidden
+// logContainer.addEventListener('transitionend', () => {
+//   if (!logContainerIsVisible) {
+//     document.querySelector('#closeButton').style.display = 'none';
+//     document.querySelector('button').style.display = 'none'; // Assuming there's only one button
+//   } else {
+//     document.querySelector('#closeButton').style.display = 'block';
+//     document.querySelector('button').style.display = 'block'; // Assuming there's only one button
+//   }
+// });
 
 
 
