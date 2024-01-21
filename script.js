@@ -7,6 +7,85 @@ document.addEventListener('DOMContentLoaded', (e) => {
   }, 2000)
 })
 
+/* Log Activity */
+let logQueue = [];
+
+function addToLog(question, answer, correctness, timestamp) {
+  const currentDate = new Date(timestamp);
+
+  logQueue = localStorage.getItem("logActivity") ?
+    JSON.parse(localStorage.getItem("logActivity")) :
+    []; //get the array from LS
+  if (logQueue.length == 100)
+    logQueue.shift()             //remove the oldest value
+  logQueue.push({
+    Q: question,
+    A: answer,
+    correctness: correctness,
+    timestamp: currentDate.toUTCString()
+  });  //insert new value
+  localStorage.setItem("logActivity", JSON.stringify(logQueue));
+}
+
+/* Show Log */
+const showLogButton = document.querySelector('#showLog');
+const logContainer = document.querySelector('#logContainer');
+const closeButton = document.querySelector('#closeButton');
+const clearButton = document.querySelector('#clearLogButton');
+
+
+logQueue = localStorage.getItem("logActivity") ?
+  JSON.parse(localStorage.getItem("logActivity")) :
+  [];
+
+
+showLogButton.addEventListener("click", () => {
+  logContainer.innerHTML = "My last 100 tries"; // Clear previous content
+  logQueue.map((object) => {
+    const active = document.createElement('ul');
+    active.classList.add('active');
+    active.innerHTML = `
+      <li>Question: ${object.Q}</li>
+      <li>Answer: ${object.A}</li>
+      <li>Correctness: ${object.correctness}</li>
+      <li>Timestamp: ${object.timestamp}</li>
+    `;
+    logContainer.appendChild(active);
+  });
+  logContainer.style.display = "flex";
+  closeButton.style.display = "block";
+  clearButton.style.display = "block";
+});
+
+closeButton.addEventListener('click', () => {
+  logContainer.style.display = 'none';
+  closeButton.style.display = "none";
+  clearButton.style.display = "none";
+});
+
+clearButton.addEventListener('click', () => {
+  logContainer.innerHTML = "";
+  localStorage.removeItem("logActivity");
+  logContainer.style.display = 'none';
+  closeButton.style.display = "none";
+  clearButton.style.display = "none";
+});
+
+
+// // Add an event listener to hide the close and clear buttons when logContainer is hidden
+// logContainer.addEventListener('transitionend', () => {
+//   if (!logContainerIsVisible) {
+//     document.querySelector('#closeButton').style.display = 'none';
+//     document.querySelector('button').style.display = 'none'; // Assuming there's only one button
+//   } else {
+//     document.querySelector('#closeButton').style.display = 'block';
+//     document.querySelector('button').style.display = 'block'; // Assuming there's only one button
+//   }
+// });
+
+
+
+
 /* Cats */
 const cats = [
   {
@@ -192,25 +271,26 @@ $(document).ready(function () {
   }
 
   function skip() {
+    addToLog(question, answer, "Skipped", Date.now());
     reset();
     newQuestion();
   }
 
   function setWins(wins) {
     let result = '0'
-    if(wins > 0) {
+    if (wins > 0) {
       result = wins
     }
 
     // If we are generating multiplication questions, then display the wins mathematically
     if (config.generateMultiplication.value) {
 
-      if(wins > 10) {
+      if (wins > 10) {
         const extraWins = wins - 10;
         result = `10 + ${extraWins}`
       }
 
-      if(wins >= 20) {
+      if (wins >= 20) {
         const winsString = wins.toString()
         const winsNumberLength = winsString.length;
         const roundNumber = wins.toString().slice(0, winsNumberLength - 1)
@@ -279,7 +359,10 @@ $(document).ready(function () {
 
   $('#submit').click(function () {
     if (total === answer) {
-      alertCorrect();
+      {
+        alertCorrect();
+        addToLog(question, answer, true, Date.now());
+      }
 
       $('#yes').promise().then(function () {
         setWins(++wins);
@@ -287,6 +370,7 @@ $(document).ready(function () {
         newQuestion();
       });
     } else {
+      addToLog(question, answer, false, Date.now());
       alertIncorrect();
       reset();
     }
