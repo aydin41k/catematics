@@ -2,11 +2,11 @@
   <img src="http://catematics.com/images/kitten_lg.png" alt="Kitten Logo" height="100"/>
 </p>
 
-# Catematics 🐾🔢
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Kids need to practice maths. They don't like homeworks. Instead, they like their screens. Incoming Catematics!
+## Available Scripts
 
-## How to Play 🎮
+In the project directory, you can run:
 
 - Go to our glorious website: http://catematics.com
 - Each round, you'll be presented with an addition problem (complexity level is in the settings).
@@ -15,45 +15,63 @@ Kids need to practice maths. They don't like homeworks. Instead, they like their
 - ...or skip if you are not sure.
 - Your total wins are tracked and saved, so you can see how much you've improved over time.
 
-## Features 🌟
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-- Cats - can't go wrong with them
-- Simple drag-and-drop gameplay
-- Score tracking - if a kids wants something, they need to work for it
-- Open source - it is you who decides where this one goes!
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Installation 🛠️
+### `npm test`
 
-So simple that instructions are excessive. Until we move to React, that is.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Credits
+### `npm run build`
 
-Development and design: Sara Salimova
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Engineering: 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-[![](https://github.com/aydin41k.png?size=50)](https://github.com/aydin41k)
-[![](https://github.com/Sabbirfeni.png?size=50)](https://github.com/Sabbirfeni)
-[![](https://github.com/RicardoHaranoP.png?size=50)](https://github.com/RicardoHaranoP)
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Contributing 🤝
+### `npm run eject`
 
-How to PR: https://help.github.com/en/articles/creating-a-pull-request
-How to PR TL;DR:
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-1. [Fork](https://help.github.com/en/articles/fork-a-repo) the codebase
-2. Create a branch
-3. Make changes and push
-4. Create a PR to my `master`
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-## Support 🙌
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-Send messages of love and pictures of cats!
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## License 📄
+## Learn More
 
-"Free-as-in-speech" license. I think it is also called the MIT License - see the [LICENSE.md](LICENSE) file for details.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
----
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-Catematics - making learning as delightful as a kitten's purr! 😺✨ (a cheesy ChatGPT tagline)
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
