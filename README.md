@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+<p align="center">
+  <img src="http://catematics.com/images/kitten_lg.png" alt="Kitten Logo" height="100"/>
+</p>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -6,7 +8,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+- Go to our glorious website: http://catematics.com
+- Each round, you'll be presented with an addition problem (complexity level is in the settings).
+- To answer, simply drag the appropriate number of big cats (worth 10), medium cats (worth 5) and small kittens (worth 1) into the bucket.
+- Hit the "Submit" button to check your answer. If you get it right, you earn a win! If not, try again!
+- ...or skip if you are not sure.
+- Your total wins are tracked and saved, so you can see how much you've improved over time.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
