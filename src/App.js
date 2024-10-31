@@ -7,9 +7,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // import Settings from './components/Settings/Settings';
 // import Header from './components/Header/Header';
 // import Footer from './components/Footer/Footer';
-// import { SettingsProvider } from './context/SettingsContext';
-// import { ActivityLogProvider } from './context/ActivityLogContext';
-// import GlobalStyles from './styles/GlobalStyles';
+import { SettingsProvider } from './context/SettingsContext';
+import { ActivityLogProvider } from './context/ActivityLogContext';
+import GlobalStyles from './styles/GlobalStyles';
 
 const App = () => {
   return (
@@ -17,14 +17,15 @@ const App = () => {
       <ActivityLogProvider>
         <Router>
           <GlobalStyles />
-          <Header />
+          <h1>Hello World</h1>
+          {/* <Header /> */}
           <Routes>
-            <Route path="/" element={<SplashScreen />} />
+            {/* <Route path="/" element={<SplashScreen />} />
             <Route path="/game" element={<Game />} />
             <Route path="/activity-log" element={<ActivityLog />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/settings" element={<Settings />} /> */}
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </Router>
       </ActivityLogProvider>
     </SettingsProvider>
